@@ -1,0 +1,12 @@
+
+
+on:
+    push:
+
+jobs:
+    build:
+    
+        runs-on: ubuntu-latest
+    
+        steps:
+            - run: cat $GITHUB_WORKSPACE/settings.xml
