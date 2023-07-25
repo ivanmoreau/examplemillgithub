@@ -8,7 +8,8 @@ interp.repositories.update(
 
 @
 
-import $ivy.`com.ivmoreau.githubmillscala::mill-github::9dcd1b8a48`
+import $ivy.`com.ivmoreau.githubmillscala::mill-github::cd1c30e186`
+import $ivy.`de.tototec::de.tobiasroeser.mill.vcs.version::0.4.0`
 
 import mill._
 import scalalib._
@@ -16,6 +17,8 @@ import mill.scalalib.publish._
 
 import com.ivmoreau.millgithub.GitHubPublishModule
 import com.ivmoreau.millgithub.ProjectRepository
+
+import de.tobiasroeser.mill.vcs.version.VcsVersion
 
 object ex extends ScalaModule with GitHubPublishModule {
   override def scalaVersion = "3.2.2"
@@ -37,5 +40,5 @@ object ex extends ScalaModule with GitHubPublishModule {
         url = "ivmoreau.com"
       )))
 
-  override def publishVersion: T[String] = "0.0.1"
+  override def publishVersion: T[String] = s"0.0.1-${VcsVersion.vcsState().format()}"
 }

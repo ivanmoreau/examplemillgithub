@@ -1,12 +1,16 @@
 
-
 on:
     push:
 
 jobs:
     build:
-    
+        permissions:
+            packages: write
         runs-on: ubuntu-latest
-    
         steps:
-            - run: cat $GITHUB_WORKSPACE/settings.xml
+            - uses: actions/checkout@v3
+            - run: chmod +x ./mill
+            - name: publish
+              env:
+                CI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: ./mill -i __.publishGitHub
